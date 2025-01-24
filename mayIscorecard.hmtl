@@ -22,19 +22,19 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        table {
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], input[type="number"] {
             width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
             padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
         .actions {
             margin-top: 20px;
@@ -58,37 +58,49 @@
 <body>
     <div class="score-card">
         <h1>Game Score Card</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Player</th>
-                 <th>Score</th>
-                   </tr>
-            </thead>
-            <tbody id="scoreTable">
-                <tr>
-                    <td>Player 1</td>
-                    <td id="score1">0</td>
-                </tr>
-                <tr>
-                    <td>Player 2</td>
-                    <td id="score2">0</td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="actions">
-            <button onclick="incrementScore(1)">Player 1 +1</button>
-            <button onclick="incrementScore(2)">Player 2 +1</button>
-            <button onclick="resetScores()">Reset Scores</button>
+        <form id="scoreForm">
+            <div>
+                <label for="player1">Player 1 Name:</label>
+                <input type="text" id="player1" name="player1" placeholder="Enter Player 1's name" required>
+            </div>
+            <div>
+                <label for="score1">Player 1 Score:</label>
+                <input type="number" id="score1" name="score1" value="0" required>
+            </div>
+            <div>
+                <label for="player2">Player 2 Name:</label>
+                <input type="text" id="player2" name="player2" placeholder="Enter Player 2's name" required>
+            </div>
+            <div>
+                <label for="score2">Player 2 Score:</label>
+                <input type="number" id="score2" name="score2" value="0" required>
+            </div>
+            <div class="actions">
+                <button type="button" onclick="updateScores()">Update Scores</button>
+                <button type="reset">Reset Form</button>
+            </div>
+        </form>
+        <div id="results" style="margin-top: 20px;">
+            <h3>Results:</h3>
+            <p id="player1Result">Player 1: 0</p>
+            <p id="player2Result">Player 2: 0</p>
         </div>
     </div>
 
     <script>
-        function incrementScore(player) {
-            const scoreElement = document.getElementById(`score${player}`);
-            let currentScore = parseInt(scoreElement.textContent);
-            scoreElement.textContent = currentScore + 1;
+        function updateScores() {
+            const player1Name = document.getElementById('player1').value || 'Player 1';
+            const player1Score = document.getElementById('score1').value;
+
+            const player2Name = document.getElementById('player2').value || 'Player 2';
+            const player2Score = document.getElementById('score2').value;
+
+            document.getElementById('player1Result').textContent = `${player1Name}: ${player1Score}`;
+            document.getElementById('player2Result').textContent = `${player2Name}: ${player2Score}`;
         }
+    </script>
+</body>
+</html>
 
         function resetScores() {
             document.getElementById('score1').textContent = '0';
