@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Score Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        .score-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .score-card h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        .actions {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .actions button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .actions button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="score-card">
+        <h1>Game Score Card</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Player</th>
+                 <th>Score</th>
+                   </tr>
+            </thead>
+            <tbody id="scoreTable">
+                <tr>
+                    <td>Player 1</td>
+                    <td id="score1">0</td>
+                </tr>
+                <tr>
+                    <td>Player 2</td>
+                    <td id="score2">0</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="actions">
+            <button onclick="incrementScore(1)">Player 1 +1</button>
+            <button onclick="incrementScore(2)">Player 2 +1</button>
+            <button onclick="resetScores()">Reset Scores</button>
+        </div>
+    </div>
+
+    <script>
+        function incrementScore(player) {
+            const scoreElement = document.getElementById(`score${player}`);
+            let currentScore = parseInt(scoreElement.textContent);
+            scoreElement.textContent = currentScore + 1;
+        }
+
+        function resetScores() {
+            document.getElementById('score1').textContent = '0';
+            document.getElementById('score2').textContent = '0';
+        }
+    </script>
+</body>
+</html>
